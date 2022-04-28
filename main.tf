@@ -15,7 +15,7 @@ locals {
   atlantis_url_events = "${local.atlantis_url}/events"
 
   # Include only one group of secrets - for github, github app,  gitlab or bitbucket
-  has_secrets = var.atlantis_gitlab_user_token != "" || var.atlantis_github_user_token != "" || var.atlantis_github_app_key != "" || var.atlantis_bitbucket_user_token != ""
+  has_secrets = try(coalesce(var.atlantis_gitlab_user_token, var.atlantis_github_user_token, var.atlantis_github_app_key, var.atlantis_bitbucket_user_token) != "", false)
 
   # token/key
   secret_name_key        = local.has_secrets ? var.atlantis_gitlab_user_token != "" ? "ATLANTIS_GITLAB_TOKEN" : var.atlantis_github_user_token != "" ? "ATLANTIS_GH_TOKEN" : var.atlantis_github_app_key != "" ? "ATLANTIS_GH_APP_KEY" : "ATLANTIS_BITBUCKET_TOKEN" : ""
@@ -594,7 +594,7 @@ data "aws_iam_policy_document" "ecs_task_access_secrets_with_kms" {
 }
 
 resource "aws_iam_role_policy" "ecs_task_access_secrets" {
-  count = var.atlantis_github_user_token != "" || var.atlantis_github_app_key != "" || var.atlantis_gitlab_user_token != "" || var.atlantis_bitbucket_user_token != "" ? 1 : 0
+  count = local.has_secrets ? 1 : 0
 
   name = "ECSTaskAccessSecretsPolicy"
 
