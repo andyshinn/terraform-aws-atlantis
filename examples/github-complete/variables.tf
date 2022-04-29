@@ -28,3 +28,17 @@ variable "github_repo_names" {
   type        = list(string)
 }
 
+variable "github_app_id" {
+  type        = string
+  description = "GitHub App ID that is running the Atlantis command"
+}
+
+variable "github_app_key" {
+  description = "The PEM encoded private key for the GitHub App"
+  type        = string
+}
+
+variable "webhook_secret" {
+  description = "Webhook secret"
+  type        = string
+}

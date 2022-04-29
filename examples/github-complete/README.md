@@ -6,6 +6,8 @@ An existing Route53 hosted zone and domain is required to deploy this example.
 
 GitHub's personal access token can be generated at https://github.com/settings/tokens
 
+GitHub app can be generated at https://github.com/settings/apps. Based on this documentation https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app, after registering the new github app with the webhook secret (atlantis_github_webhook_secret input), the github app should be installed and the private key (atlantis_github_app_key input) associated to it.
+
 ## Usage
 
 To run this code you need to copy `terraform.tfvars.sample` into `terraform.tfvars` and update the values locally or specify them using environment variables (`TF_VAR_github_token=xxx`, `TF_VAR_github_owner=xxx`, etc.). Once ready, execute:
