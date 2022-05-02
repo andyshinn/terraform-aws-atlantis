@@ -38,7 +38,7 @@ variable "github_app_key" {
   type        = string
 }
 
-variable "webhook_secret" {
+variable "github_webhook_secret" {
   description = "Webhook secret"
   type        = string
 }
