@@ -78,18 +78,13 @@ module "atlantis" {
   # Trusted roles
   trusted_principals = ["ssm.amazonaws.com"]
 
-  # Atlantis w/ GitHub user
-
-  atlantis_github_user       = var.github_user
-  atlantis_github_user_token = var.github_token
-
   # Atlantis w/ GitHub app
 
   ################################################################################
   # Suggestion: instead of allocating the values of the atlantis_github_app_key
-  # and atlantis_github_webhook_secret in the tfvars file,it is suggested to upload
-  # the values in the AWS Parameter Store of the atlantis account and call the
-  # values via the data source function
+  # and atlantis_github_webhook_secret in the tfvars file,it is suggested to
+  # upload the values in the AWS Parameter Store of the atlantis account and
+  # call the values via the data source function
   # (e.g. data.aws_ssm_parameter.ghapp_key.value) for security reasons.
   ################################################################################
 
