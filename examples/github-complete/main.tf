@@ -92,7 +92,7 @@ module "atlantis" {
   atlantis_github_app_key        = var.github_app_key
   atlantis_github_webhook_secret = var.github_webhook_secret # webhook secret associated to GitHub app
 
-  atlantis_repo_allowlist = ["github.com/${var.github_owner}/*"] # atlantis requires you to specify an allowlist of repositories it will accept webhooks from
+  atlantis_repo_allowlist = [for repo in var.github_repo_names : "github.com/${var.github_owner}/${repo}"]
 
   # ALB access
   alb_ingress_cidr_blocks         = var.alb_ingress_cidr_blocks

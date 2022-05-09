@@ -1,12 +1,25 @@
-# Complete Atlantis example with GitHub Webhooks
+# Complete Atlantis example with GitHub App and Webhooks
 
 Configuration in this directory creates the necessary infrastructure and resources for running Atlantis on Fargate plus GitHub repository webhooks configured to Atlantis URL.
 
 An existing Route53 hosted zone and domain is required to deploy this example.
 
-GitHub's personal access token can be generated at https://github.com/settings/tokens
+The GitHub App can be generated using multiple methods:
 
-GitHub app can be generated at https://github.com/settings/apps. Based on this documentation https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app, after registering the new github app with the webhook secret (atlantis_github_webhook_secret input), the github app should be installed and the private key (atlantis_github_app_key input) associated to it.
+- You can follow Atlantis instructions depicted [here](https://www.runatlantis.io/docs/access-credentials.html#github-app). The Atlantis method mostly automates the GitHub App generation using [GitHub App Manifest](https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app-from-a-manifest), but you need an exposed endpoint to complete the process.
+- The other method is to manually create the GitHub App as instructed [here](https://docs.github.com/en/developers/apps/building-github-apps/creating-a-github-app).
+
+Once you have your GitHub App registered you will be able to access/manage the required parameters:
+
+- `atlantis_github_app_id` to identify the GitHub app.
+- `atlantis_github_app_key` to interact with GitHub.
+- `atlantis_github_webhook_secret` to receive and validate incoming webhook invocations from GitHub.
+
+## GitHub Personal Access Token (PAT) is no longer recommended
+
+While still supported, the use of GitHub Personal Access Token (PAT) is no longer the recommended method in favor of GitHub App.
+
+[GitHub Apps](https://docs.github.com/en/developers/apps/getting-started-with-apps/about-apps) provide more control over repository access/permissions and does not require the use of bot accounts.
 
 ## Usage
 
